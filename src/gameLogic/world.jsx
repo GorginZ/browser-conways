@@ -98,9 +98,27 @@ class World extends Component {
     console.log("in tick");
   }
 
+  VisualizeGridInConsole(grid) {
+let stringGrid = new String;
+    
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (grid.cellGrid[(i, j)].IsLiveCell === true) {
+          stringGrid += "X";
+        } else {
+          stringGrid += "O";
+        }
+      }
+      stringGrid += "\n";
+    }
+    return stringGrid;
+  }
+
   render() {
-   this.BuildWorld(10, 10);
-   console.log(this.grid);
+    this.BuildWorld(10, 10);
+    // console.log(this.grid.cellGrid[0][0]);
+    console.log(this.VisualizeGridInConsole(this.grid));
+    // this.grid.setElements()
 
     return <div>Hello world</div>;
   }

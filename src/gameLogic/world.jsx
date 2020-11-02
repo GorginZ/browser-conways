@@ -116,10 +116,14 @@ let stringGrid = new String;
 
   render() {
     this.BuildWorld(10, 10);
-    // console.log(this.grid.cellGrid[0][0]);
+    console.log(this.grid.cellGrid[0][0]);
     console.log(this.VisualizeGridInConsole(this.grid));
-    // this.grid.setElements()
 
+
+    this.grid.setElements([new RowColumn(0,0), new RowColumn(0,1), new RowColumn(0,2)]);
+        console.log(this.grid.cellGrid[0][0]);
+
+console.log(this.VisualizeGridInConsole(this.grid));
     return <div>Hello world</div>;
   }
 }

@@ -21,10 +21,10 @@ class Grid {
     return cellGrid;
   }
 
-  setElements(listOfrowColumnElements)
+  setElements(arrayOfRowColumnElements)
   {
-       listOfrowColumnElements.ForEach((rowColumn) => {
-      this.cellGrid[rowColumn.row][rowColumn.column] = Cell.IsAlive = true;
+       arrayOfRowColumnElements.forEach((rowColumn) => {
+      this.cellGrid[rowColumn.row][rowColumn.column].IsAlive = true;
    
     });
   }

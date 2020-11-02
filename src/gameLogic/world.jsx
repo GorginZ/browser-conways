@@ -1,13 +1,22 @@
 import Grid from "./grid";
+import React, { Component } from "react";
+
 import RowColumn from "./rowColumn";
 
-class World {
+class World extends Component {
+  constructor(props) {
+    super(props);
+    this.rows = props.rows;
+    this.columns = props.columns;
+    this.grid = this.BuildWorld(this.rows, this.columns);
+  }
 
-constructor() {
-  this.grid = new Grid();
-}
+  BuildWorld(rows, columns) {
+    this.grid = new Grid(rows, columns);
+    return this.grid;
+  }
 
-IsLiveCell(cell) {
+  IsLiveCell(cell) {
     if (cell.isAlive) {
       return true;
     } else {
@@ -21,7 +30,8 @@ IsLiveCell(cell) {
     let rightNeighbour =
       cell.column === this.grid.ColumnCount() - 1 ? 0 : cell.column + 1;
     let upNeighbour = cell.row === 0 ? this.grid.RowCount() - 1 : cell.row - 1;
-    let downNeighbour = cell.row === this.grid.RowCount() - 1 ? 0 : cell.row + 1;
+    let downNeighbour =
+      cell.row === this.grid.RowCount() - 1 ? 0 : cell.row + 1;
 
     let neighbourList = [
       new RowColumn(cell.row, rightNeighbour),
@@ -34,7 +44,7 @@ IsLiveCell(cell) {
       new RowColumn(upNeighbour, leftNeighbour),
 
       new RowColumn(downNeighbour, rightNeighbour),
-      new RowColumn(downNeighbour, leftNeighbour)
+      new RowColumn(downNeighbour, leftNeighbour),
     ];
 
     return neighbourList;
@@ -67,27 +77,33 @@ IsLiveCell(cell) {
           this.IsLiveCell(this.grid[(row, column)]) &&
           (numberOfLiveNeighbours === 3 || numberOfLiveNeighbours === 2)
         ) {
-          coordinatesOfCellsToAlive.push(new RowColumn(row, column))
+          coordinatesOfCellsToAlive.push(new RowColumn(row, column));
         }
         if (
           !this.IsLiveCell(this.grid[(row, column)]) &&
           numberOfLiveNeighbours === 3
         ) {
-          coordinatesOfCellsToAlive.push(new RowColumn(row, column))
+          coordinatesOfCellsToAlive.push(new RowColumn(row, column));
         }
       }
     }
     return coordinatesOfCellsToAlive;
   }
 
-
-
   Tick() {
-    let listOfCoordinatesToMakeAlive = [] 
+    let listOfCoordinatesToMakeAlive = [];
     listOfCoordinatesToMakeAlive = this.CellsToMakeAliveOnTick();
 
-  this.grid.setElements(listOfCoordinatesToMakeAlive);
-      console.log("in tick");
-    ;
+    this.grid.setElements(listOfCoordinatesToMakeAlive);
+    console.log("in tick");
+  }
+
+  render() {
+   this.BuildWorld(10, 10);
+   console.log(this.grid);
+
+    return <div>Hello world</div>;
   }
 }
+
+export default World;

@@ -2,17 +2,19 @@ import Cell from "./cell";
 
 class Grid {
 
-  constructor(){
-    this.cellGrid = this.buildGrid();
+
+
+  constructor(rows, columns){
+    this.cellGrid = this.buildGrid(rows, columns);
   }
 
   buildGrid(rows, columns){
     const cellGrid = [];
     for (let i = 0; i < rows; i++) {
-      cellGrid.push(new []());
+      cellGrid.push([]);
       for (let j = 0; j < columns; j++) {
         cellGrid[i].push(
-          new Cell()
+          new Cell(i,j)
         );
       }
     }
@@ -25,6 +27,12 @@ class Grid {
       this.cellGrid[rowColumn.row][rowColumn.column] = Cell.IsAlive = true;
    
     });
+  }
+
+    render() {
+    // this.buildGrid(50, 50);
+    // console.log(this.cellGrid);
+    // return <div id="grid"> {this.GridSeer()}</div>;
   }
 }
 export default Grid;
